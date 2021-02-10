@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.demo.domain.IncomeInfo;
 import com.example.demo.domain.MoneyInfo;
 import com.example.demo.response.MoneyDataResponse;
 import com.example.demo.response.MoneyResponse;
@@ -24,9 +25,6 @@ public class MoneyDataController {
 
     @GetMapping("/piechart")
     public ResponseEntity<PieDataResponse> getMoneyInfo(String userNum, Integer year, Integer month) {
-
-        System.out.println(year);
-        System.out.println(month);
 
         List<MoneyInfo> getPieDataList = moneyDataService.getByYearMonth(userNum, year, month);
         List<Integer> totalAmountList = new ArrayList<>();
@@ -86,5 +84,28 @@ public class MoneyDataController {
         }
         MoneyDataResponse moneyDataResponse = MoneyDataResponse.builder().moneyInfoList(moneyAllList).build();
         return new ResponseEntity<>(moneyDataResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/getTotalExpense")
+    public Integer getTotalExpenses(String userNum, Integer year, Integer month) {
+        List<MoneyInfo> getTotalExpense = moneyDataService.getByYearMonth(userNum, year, month);
+        Integer totalExpense = 0;
+        for (MoneyInfo info : getTotalExpense) {
+            totalExpense += info.getAmount();
+        }
+        System.out.println(totalExpense);
+
+        return totalExpense;
+    }
+
+    @GetMapping("/getTotalIncome")
+    public Integer getTotalIncome(String userNum, Integer year, Integer month) {
+        List<IncomeInfo> getTotalIncome = moneyDataService.getIncomeInfo(userNum, year, month);
+        Integer totalIncome = 0;
+        for (IncomeInfo info : getTotalIncome) {
+            totalIncome += info.getIncome();
+        }
+        System.out.println(totalIncome);
+        return totalIncome;
     }
 }
