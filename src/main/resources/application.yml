@@ -3,7 +3,7 @@ spring:
     sql-script-encoding: UTF-8
     url: jdbc:mysql://localhost:3306/money_db?serverTimezone=JST
     username: root
-    password: arisa0522
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database: MYSQL
