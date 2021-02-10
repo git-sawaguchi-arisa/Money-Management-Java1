@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.domain.IncomeInfo;
 import com.example.demo.domain.MoneyInfo;
 import com.example.demo.service.PostMoneyService;
 
@@ -22,7 +23,7 @@ public class PostMoneyController {
 	
 	private final PostMoneyService postMoneyService;
 	
-	@PostMapping("/setMoney")
+	@PostMapping("/postExpense")
     @ResponseStatus(HttpStatus.CREATED)
 	public MoneyInfo insertMoney (@RequestBody MoneyInfo moneyInfo) {
 		postMoneyService.insertMoneyInfo(moneyInfo);
@@ -30,18 +31,38 @@ public class PostMoneyController {
 		return moneyInfo;
 	}
 	
+	@PostMapping("/postIncome")
+	 @ResponseStatus(HttpStatus.CREATED)
+	public IncomeInfo insertIncome (@RequestBody IncomeInfo incomeInfo) {
+		postMoneyService.insertIncome(incomeInfo);
+		
+		return incomeInfo;
+	}
+	
 	@GetMapping("/getMoney")
 	public List<MoneyInfo> getMoneyData(String userNum) {
 		return postMoneyService.getMoneyData(userNum);
+	}
+	
+	@GetMapping("/getIncome")
+	public List<IncomeInfo> getIncomeData(String userNum) {
+		return postMoneyService.getIncomeData(userNum);
 	}
 	
 	@GetMapping("/deleteMoney")
 	public Integer deleteMoneyData (Integer moneyId) {
 		postMoneyService.deleteMoneyData(moneyId);
 		
-		System.out.println(moneyId);
 		return moneyId;
 	}
+	
+	@GetMapping("/deleteIncome")
+	public Integer deleteIncomeData (Integer incomeId) {
+		postMoneyService.deleteIncomeData(incomeId);
+		
+		return incomeId;
+	}
+	
 	
 	
 }
