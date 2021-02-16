@@ -19,29 +19,28 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 public class PostMoneyController {
-	
+
 	private final PostMoneyService postMoneyService;
-	
+
 	@PostMapping("/setMoney")
-    @ResponseStatus(HttpStatus.CREATED)
-	public MoneyInfo insertMoney (@RequestBody MoneyInfo moneyInfo) {
+	@ResponseStatus(HttpStatus.CREATED)
+	public MoneyInfo insertMoney(@RequestBody MoneyInfo moneyInfo) {
 		postMoneyService.insertMoneyInfo(moneyInfo);
-		
+
 		return moneyInfo;
 	}
-	
+
 	@GetMapping("/getMoney")
 	public List<MoneyInfo> getMoneyData(String userNum) {
 		return postMoneyService.getMoneyData(userNum);
 	}
-	
+
 	@GetMapping("/deleteMoney")
-	public Integer deleteMoneyData (Integer moneyId) {
+	public Integer deleteMoneyData(Integer moneyId) {
 		postMoneyService.deleteMoneyData(moneyId);
-		
+
 		System.out.println(moneyId);
 		return moneyId;
 	}
-	
-	
+
 }
