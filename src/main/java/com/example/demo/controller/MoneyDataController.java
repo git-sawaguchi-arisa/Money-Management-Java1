@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,7 +110,7 @@ public class MoneyDataController {
         List<IncomeInfo> getTotalIncome = moneyDataService.getIncomeInfo(userNum, year, month);
         Integer totalIncome = 0;
         for (IncomeInfo info : getTotalIncome) {
-            totalIncome += info.getIncome();
+            totalIncome += info.getAmount();
         }
         System.out.println(totalIncome);
         return totalIncome;
@@ -123,8 +122,8 @@ public class MoneyDataController {
         List<MoneyResponse> incomeAllList = new ArrayList<>();
         for (IncomeInfo info : getIncomeData) {
             MoneyResponse moneyResponse = new MoneyResponse();
-            moneyResponse.setMoneyId(info.getIncomeId());
-            moneyResponse.setAmount(info.getIncome());
+            moneyResponse.setMoneyId(info.getMoneyId());
+            moneyResponse.setAmount(info.getAmount());
             moneyResponse.setDate(info.getDate());
             moneyResponse.setDetails(info.getDetails());
             moneyResponse.setJenre(info.getJenre());
@@ -142,5 +141,12 @@ public class MoneyDataController {
     public MoneyInfo updateMoney(@RequestBody MoneyInfo moneyInfo) {
         moneyDataService.updateMoneyInfo(moneyInfo);
         return moneyInfo;
+    }
+
+    @PostMapping("/updateIncome")
+    @ResponseStatus(HttpStatus.CREATED)
+    public IncomeInfo updateIncome(@RequestBody IncomeInfo incomeInfo) {
+        moneyDataService.updateIncome(incomeInfo);
+        return incomeInfo;
     }
 }
