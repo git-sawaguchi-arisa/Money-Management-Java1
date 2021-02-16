@@ -26,4 +26,8 @@ public class MoneyDataService {
         return incomeInfoRepository.getIncome(userNum, year, month);
     }
 
+    public void updateMoneyInfo(MoneyInfo moneyInfo) {
+        moneyDataRepository.save(moneyInfo);
+    }
+
 }

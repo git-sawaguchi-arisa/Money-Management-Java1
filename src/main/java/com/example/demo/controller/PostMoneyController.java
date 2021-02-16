@@ -21,14 +21,14 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 public class PostMoneyController {
-	
+
 	private final PostMoneyService postMoneyService;
 	
 	@PostMapping("/postExpense")
     @ResponseStatus(HttpStatus.CREATED)
 	public MoneyInfo insertMoney (@RequestBody MoneyInfo moneyInfo) {
 		postMoneyService.insertMoneyInfo(moneyInfo);
-		
+
 		return moneyInfo;
 	}
 	
@@ -51,9 +51,8 @@ public class PostMoneyController {
 	}
 	
 	@GetMapping("/deleteMoney")
-	public Integer deleteMoneyData (Integer moneyId) {
-		postMoneyService.deleteMoneyData(moneyId);
-		
+	public Integer deleteMoneyData(Integer moneyId) {
+		postMoneyService.deleteMoneyData(moneyId);	
 		return moneyId;
 	}
 	
@@ -73,7 +72,5 @@ public class PostMoneyController {
 		
 		return moneyInfo;
 	}
-	
-	
 	
 }

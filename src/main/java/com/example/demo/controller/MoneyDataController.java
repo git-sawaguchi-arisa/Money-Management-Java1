@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,9 @@ import com.example.demo.service.MoneyDataService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
@@ -76,11 +80,15 @@ public class MoneyDataController {
         List<MoneyResponse> moneyAllList = new ArrayList<>();
         for (MoneyInfo info : getMoneyInfoList) {
             MoneyResponse moneyResponse = new MoneyResponse();
+            moneyResponse.setMoneyId(info.getMoneyId());
             moneyResponse.setAmount(info.getAmount());
             moneyResponse.setDate(info.getDate());
             moneyResponse.setDetails(info.getDetails());
             moneyResponse.setJenre(info.getJenre());
             moneyAllList.add(moneyResponse);
+        }
+        if (moneyAllList == null) {
+            return null;
         }
         MoneyDataResponse moneyDataResponse = MoneyDataResponse.builder().moneyInfoList(moneyAllList).build();
         return new ResponseEntity<>(moneyDataResponse, HttpStatus.OK);
@@ -107,5 +115,32 @@ public class MoneyDataController {
         }
         System.out.println(totalIncome);
         return totalIncome;
+    }
+
+    @GetMapping("/getIncomeData")
+    public ResponseEntity<MoneyDataResponse> getIncomeInfo(String userNum, Integer year, Integer month) {
+        List<IncomeInfo> getIncomeData = moneyDataService.getIncomeInfo(userNum, year, month);
+        List<MoneyResponse> incomeAllList = new ArrayList<>();
+        for (IncomeInfo info : getIncomeData) {
+            MoneyResponse moneyResponse = new MoneyResponse();
+            moneyResponse.setMoneyId(info.getIncomeId());
+            moneyResponse.setAmount(info.getIncome());
+            moneyResponse.setDate(info.getDate());
+            moneyResponse.setDetails(info.getDetails());
+            moneyResponse.setJenre(info.getJenre());
+            incomeAllList.add(moneyResponse);
+        }
+        if (incomeAllList == null) {
+            return null;
+        }
+        MoneyDataResponse moneyDataResponse = MoneyDataResponse.builder().moneyInfoList(incomeAllList).build();
+        return new ResponseEntity<>(moneyDataResponse, HttpStatus.OK);
+    }
+
+    @PostMapping("/updateMoney")
+    @ResponseStatus(HttpStatus.CREATED)
+    public MoneyInfo updateMoney(@RequestBody MoneyInfo moneyInfo) {
+        moneyDataService.updateMoneyInfo(moneyInfo);
+        return moneyInfo;
     }
 }

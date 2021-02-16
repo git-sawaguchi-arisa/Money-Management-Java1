@@ -15,4 +15,6 @@ public interface MoneyDataRepository extends JpaRepository<MoneyInfo, Integer> {
     @Query(value = "SELECT * from money_info where user_num = ?1 AND DATE_FORMAT(date, '%Y') = ?2 AND DATE_FORMAT(date, '%m') = ?3", nativeQuery = true)
     List<MoneyInfo> getByYearMonth(String userNum, Integer year, Integer month);
 
+    // @Query(value = "UPDATE money_info SET jenre = ?1 AND amount = ?2 AND date =
+    // ?3 AND user")
 }
