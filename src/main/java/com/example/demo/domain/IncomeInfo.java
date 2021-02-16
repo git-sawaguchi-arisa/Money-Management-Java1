@@ -21,7 +21,7 @@ public class IncomeInfo {
     @Id
     @Column(name = "income_id", columnDefinition = "INT")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer incomeId;
+    private Integer moneyId;
 
     /** ジャンル */
     @Column(name = "jenre", columnDefinition = "VARCHAR(225)")
@@ -29,7 +29,7 @@ public class IncomeInfo {
 
     /** 合計金額 */
     @Column(name = "income", columnDefinition = "INT")
-    private Integer income;
+    private Integer amount;
 
     /** 詳細 */
     @Column(name = "details", columnDefinition = "VARCHAR(225)")
