@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,7 +14,6 @@ import com.example.demo.domain.IncomeInfo;
 import com.example.demo.domain.MoneyInfo;
 import com.example.demo.service.PostMoneyService;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -71,6 +69,15 @@ public class PostMoneyController {
 		postMoneyService.insertMoneyInfo(moneyInfo);
 		
 		return moneyInfo;
+	}
+	
+	@PutMapping("/putIncome")
+	public IncomeInfo updateIncome (@RequestBody IncomeInfo incomeInfo) {
+		System.out.println(incomeInfo);
+		
+		postMoneyService.insertIncome(incomeInfo);
+		
+		return incomeInfo;
 	}
 	
 }
