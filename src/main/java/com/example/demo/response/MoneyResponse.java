@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 public class MoneyResponse {
 
+    private Integer moneyId;
+
     private Integer amount;
 
     private String jenre;
