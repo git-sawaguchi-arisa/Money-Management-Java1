@@ -30,4 +30,8 @@ public class MoneyDataService {
         moneyDataRepository.save(moneyInfo);
     }
 
+    public void updateIncome(IncomeInfo incomeInfo) {
+        incomeInfoRepository.save(incomeInfo);
+    }
+
 }
