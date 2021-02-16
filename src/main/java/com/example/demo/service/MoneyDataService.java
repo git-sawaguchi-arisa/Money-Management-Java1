@@ -34,4 +34,12 @@ public class MoneyDataService {
         incomeInfoRepository.save(incomeInfo);
     }
 
+    public void deleteExpenses(Integer moneyId) {
+        moneyDataRepository.findById(moneyId).ifPresent(moneyInfo -> moneyDataRepository.delete(moneyInfo));
+    }
+
+    public void deleteIncomeData(Integer moneyId) {
+        incomeInfoRepository.findById(moneyId).ifPresent(incomeInfo -> incomeInfoRepository.delete(incomeInfo));
+    }
+
 }
