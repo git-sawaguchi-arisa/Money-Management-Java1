@@ -127,8 +127,9 @@ public class MoneyDataController {
         List<IncomeInfo> getTotalIncome = moneyDataService.getIncomeInfo(userNum, year, month);
         Integer totalIncome = 0;
         for (IncomeInfo info : getTotalIncome) {
-            totalIncome += info.getAmount();
+            totalIncome += info.getIncome();
         }
+
         System.out.println(totalIncome);
         return totalIncome;
     }
@@ -139,8 +140,8 @@ public class MoneyDataController {
         List<MoneyResponse> incomeAllList = new ArrayList<>();
         for (IncomeInfo info : getIncomeData) {
             MoneyResponse moneyResponse = new MoneyResponse();
-            moneyResponse.setMoneyId(info.getMoneyId());
-            moneyResponse.setAmount(info.getAmount());
+            moneyResponse.setMoneyId(info.getIncome());
+            moneyResponse.setAmount(info.getIncome());
             moneyResponse.setDate(info.getDate());
             moneyResponse.setDetails(info.getDetails());
             moneyResponse.setJenre(info.getJenre());
