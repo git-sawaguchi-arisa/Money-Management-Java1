@@ -23,54 +23,54 @@ import lombok.RequiredArgsConstructor;
 public class PostMoneyController {
 
 	private final PostMoneyService postMoneyService;
-	
+
 	@PostMapping("/postExpense")
-    @ResponseStatus(HttpStatus.CREATED)
-	public MoneyInfo insertMoney (@RequestBody MoneyInfo moneyInfo) {
+	@ResponseStatus(HttpStatus.CREATED)
+	public MoneyInfo insertMoney(@RequestBody MoneyInfo moneyInfo) {
 		postMoneyService.insertMoneyInfo(moneyInfo);
 
 		return moneyInfo;
 	}
-	
+
 	@PostMapping("/postIncome")
-	 @ResponseStatus(HttpStatus.CREATED)
-	public IncomeInfo insertIncome (@RequestBody IncomeInfo incomeInfo) {
+	@ResponseStatus(HttpStatus.CREATED)
+	public IncomeInfo insertIncome(@RequestBody IncomeInfo incomeInfo) {
 		postMoneyService.insertIncome(incomeInfo);
-		
+
 		return incomeInfo;
 	}
-	
+
 	@GetMapping("/getMoney")
 	public List<MoneyInfo> getMoneyData(String userNum) {
 		return postMoneyService.getMoneyData(userNum);
 	}
-	
+
 	@GetMapping("/getIncome")
 	public List<IncomeInfo> getIncomeData(String userNum) {
 		return postMoneyService.getIncomeData(userNum);
 	}
-	
+
 	@GetMapping("/deleteMoney")
 	public Integer deleteMoneyData(Integer moneyId) {
-		postMoneyService.deleteMoneyData(moneyId);	
+		postMoneyService.deleteMoneyData(moneyId);
 		return moneyId;
 	}
-	
+
 	@GetMapping("/deleteIncome")
-	public Integer deleteIncomeData (Integer incomeId) {
+	public Integer deleteIncomeData(Integer incomeId) {
 		postMoneyService.deleteIncomeData(incomeId);
-		
+
 		return incomeId;
 	}
-	
+
 	@PutMapping("/putExpense")
-	public MoneyInfo updateExpenst (@RequestBody MoneyInfo moneyInfo) {
-	
+	public MoneyInfo updateExpenst(@RequestBody MoneyInfo moneyInfo) {
+
 		System.out.println(moneyInfo);
-		
+
 		postMoneyService.insertMoneyInfo(moneyInfo);
-		
+
 		return moneyInfo;
 	}
-	
+
 }
