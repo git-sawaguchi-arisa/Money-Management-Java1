@@ -10,5 +10,7 @@ import lombok.Getter;
 public class MoneyDataResponse {
 
     private List<MoneyResponse> moneyInfoList;
+    
+    private List<IncomeResponse> incomeInfoList;
 
 }
