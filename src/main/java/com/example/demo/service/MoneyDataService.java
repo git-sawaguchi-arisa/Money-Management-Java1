@@ -38,8 +38,8 @@ public class MoneyDataService {
         moneyDataRepository.findById(moneyId).ifPresent(moneyInfo -> moneyDataRepository.delete(moneyInfo));
     }
 
-    public void deleteIncomeData(Integer moneyId) {
-        incomeInfoRepository.findById(moneyId).ifPresent(incomeInfo -> incomeInfoRepository.delete(incomeInfo));
+    public void deleteIncomeData(Integer incomeId) {
+        incomeInfoRepository.findById(incomeId).ifPresent(incomeInfo -> incomeInfoRepository.delete(incomeInfo));
     }
 
 }

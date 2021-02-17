@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.demo.domain.IncomeInfo;
 import com.example.demo.domain.MoneyInfo;
+import com.example.demo.response.IncomeResponse;
 import com.example.demo.response.MoneyDataResponse;
 import com.example.demo.response.MoneyResponse;
 import com.example.demo.response.PieDataResponse;
@@ -137,20 +138,22 @@ public class MoneyDataController {
     @GetMapping("/getIncomeData")
     public ResponseEntity<MoneyDataResponse> getIncomeInfo(String userNum, Integer year, Integer month) {
         List<IncomeInfo> getIncomeData = moneyDataService.getIncomeInfo(userNum, year, month);
-        List<MoneyResponse> incomeAllList = new ArrayList<>();
+        List<IncomeResponse> incomeAllList = new ArrayList<>();
         for (IncomeInfo info : getIncomeData) {
-            MoneyResponse moneyResponse = new MoneyResponse();
-            moneyResponse.setMoneyId(info.getIncome());
-            moneyResponse.setAmount(info.getIncome());
-            moneyResponse.setDate(info.getDate());
-            moneyResponse.setDetails(info.getDetails());
-            moneyResponse.setJenre(info.getJenre());
-            incomeAllList.add(moneyResponse);
+            
+            IncomeResponse incomeResponse = new IncomeResponse();
+            incomeResponse.setIncomeId(info.getIncomeId());
+            incomeResponse.setIncome(info.getIncome());
+            incomeResponse.setDate(info.getDate());
+            incomeResponse.setDetails(info.getDetails());
+            incomeResponse.setJenre(info.getJenre());
+            
+            incomeAllList.add(incomeResponse);
         }
         if (incomeAllList == null) {
             return null;
         }
-        MoneyDataResponse moneyDataResponse = MoneyDataResponse.builder().moneyInfoList(incomeAllList).build();
+        MoneyDataResponse moneyDataResponse = MoneyDataResponse.builder().incomeInfoList(incomeAllList).build();
         return new ResponseEntity<>(moneyDataResponse, HttpStatus.OK);
     }
 
@@ -175,9 +178,9 @@ public class MoneyDataController {
     }
 
     @GetMapping("/deleteIncomeData")
-    public Integer deleteIncomeData(Integer moneyId) {
-        System.out.println(moneyId);
-        moneyDataService.deleteIncomeData(moneyId);
-        return moneyId;
+    public Integer deleteIncomeData(Integer incomeId) {
+        System.out.println(incomeId);
+        moneyDataService.deleteIncomeData(incomeId);
+        return incomeId;
     }
 }

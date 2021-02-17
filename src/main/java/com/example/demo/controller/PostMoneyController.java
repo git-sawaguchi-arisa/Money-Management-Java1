@@ -33,6 +33,7 @@ public class PostMoneyController {
 	@PostMapping("/postIncome")
 	@ResponseStatus(HttpStatus.CREATED)
 	public IncomeInfo insertIncome(@RequestBody IncomeInfo incomeInfo) {
+		
 		postMoneyService.insertIncome(incomeInfo);
 
 		return incomeInfo;
