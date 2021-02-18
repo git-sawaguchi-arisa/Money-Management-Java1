@@ -25,6 +25,8 @@ public class PostMoneyController {
 	@PostMapping("/postExpense")
 	@ResponseStatus(HttpStatus.CREATED)
 	public MoneyInfo insertMoney(@RequestBody MoneyInfo moneyInfo) {
+
+		
 		postMoneyService.insertMoneyInfo(moneyInfo);
 
 		return moneyInfo;
@@ -33,7 +35,7 @@ public class PostMoneyController {
 	@PostMapping("/postIncome")
 	@ResponseStatus(HttpStatus.CREATED)
 	public IncomeInfo insertIncome(@RequestBody IncomeInfo incomeInfo) {
-		
+
 		postMoneyService.insertIncome(incomeInfo);
 
 		return incomeInfo;
@@ -64,7 +66,8 @@ public class PostMoneyController {
 
 	@PutMapping("/putExpense")
 	public MoneyInfo updateExpenst(@RequestBody MoneyInfo moneyInfo) {
-
+		
+	
 		System.out.println(moneyInfo);
 
 		postMoneyService.insertMoneyInfo(moneyInfo);
@@ -74,6 +77,7 @@ public class PostMoneyController {
 	
 	@PutMapping("/putIncome")
 	public IncomeInfo updateIncome (@RequestBody IncomeInfo incomeInfo) {
+
 		System.out.println(incomeInfo);
 		
 		postMoneyService.insertIncome(incomeInfo);
