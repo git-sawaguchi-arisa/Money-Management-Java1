@@ -32,11 +32,24 @@ public class MoneyDataController {
 
         List<MoneyInfo> getPieDataList = moneyDataService.getByYearMonth(userNum, year, month);
         List<Integer> totalAmountList = new ArrayList<>();
+        // 食費
         Integer foodTotal = 0;
+        // 日用品
         Integer dailyTotal = 0;
+        // 衣服
         Integer clothTotal = 0;
+        // 交通費
         Integer transportTotal = 0;
+        // その他
         Integer anyTotal = 0;
+        // 家賃、光熱費
+        Integer homeTotal = 0;
+        // 趣味
+        Integer hobbyTotal = 0;
+        // 美容
+        Integer beautyTotal = 0;
+        // 医療
+        Integer medicalTotal = 0;
         for (MoneyInfo info : getPieDataList) {
             if (info.getJenre().equals("食費")) {
                 foodTotal += info.getAmount();
@@ -55,6 +68,19 @@ public class MoneyDataController {
             if (info.getJenre().equals("その他")) {
                 anyTotal += info.getAmount();
             }
+            if (info.getJenre().equals("家賃・光熱費")) {
+                homeTotal += info.getAmount();
+            }
+            if (info.getJenre().equals("趣味")) {
+                hobbyTotal += info.getAmount();
+            }
+            if (info.getJenre().equals("美容")) {
+                beautyTotal += info.getAmount();
+            }
+            if (info.getJenre().equals("医療費")) {
+                medicalTotal += info.getAmount();
+            }
+
         }
 
         if (foodTotal == 0) {
@@ -85,6 +111,30 @@ public class MoneyDataController {
             totalAmountList.add(0);
         } else {
             totalAmountList.add(anyTotal);
+        }
+
+        if (homeTotal == 0) {
+            totalAmountList.add(0);
+        } else {
+            totalAmountList.add(homeTotal);
+        }
+
+        if (hobbyTotal == 0) {
+            totalAmountList.add(0);
+        } else {
+            totalAmountList.add(hobbyTotal);
+        }
+
+        if (beautyTotal == 0) {
+            totalAmountList.add(0);
+        } else {
+            totalAmountList.add(beautyTotal);
+        }
+
+        if (medicalTotal == 0) {
+            totalAmountList.add(0);
+        } else {
+            totalAmountList.add(medicalTotal);
         }
 
         PieDataResponse pieDataResponse = PieDataResponse.builder().pieDataList(totalAmountList).build();
@@ -140,14 +190,14 @@ public class MoneyDataController {
         List<IncomeInfo> getIncomeData = moneyDataService.getIncomeInfo(userNum, year, month);
         List<IncomeResponse> incomeAllList = new ArrayList<>();
         for (IncomeInfo info : getIncomeData) {
-            
+
             IncomeResponse incomeResponse = new IncomeResponse();
             incomeResponse.setIncomeId(info.getIncomeId());
             incomeResponse.setIncome(info.getIncome());
             incomeResponse.setDate(info.getDate());
             incomeResponse.setDetails(info.getDetails());
             incomeResponse.setJenre(info.getJenre());
-            
+
             incomeAllList.add(incomeResponse);
         }
         if (incomeAllList == null) {
