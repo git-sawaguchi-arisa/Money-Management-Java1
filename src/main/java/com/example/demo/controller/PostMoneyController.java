@@ -1,5 +1,9 @@
 package com.example.demo.controller;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -25,7 +29,6 @@ public class PostMoneyController {
 	@PostMapping("/postExpense")
 	@ResponseStatus(HttpStatus.CREATED)
 	public MoneyInfo insertMoney(@RequestBody MoneyInfo moneyInfo) {
-
 		
 		postMoneyService.insertMoneyInfo(moneyInfo);
 
@@ -39,6 +42,11 @@ public class PostMoneyController {
 		postMoneyService.insertIncome(incomeInfo);
 
 		return incomeInfo;
+	}
+	
+	@GetMapping("/test")
+	public String test() {
+		return "テスト";
 	}
 
 	@GetMapping("/getMoney")
