@@ -30,8 +30,8 @@ public class MoneyDataController {
     @GetMapping("/piechart")
     public ResponseEntity<PieDataResponse> getMoneyInfo(String userNum, Integer year, Integer month) {
 
-        List<MoneyInfo> getPieDataList = moneyDataService.getByYearMonth(userNum, year, month);
-        List<Integer> totalAmountList = new ArrayList<>();
+        var getPieDataList = moneyDataService.getByYearMonth(userNum, year, month);
+        var totalAmountList = new ArrayList<Integer>();
         // 食費
         Integer foodTotal = 0;
         // 日用品
@@ -143,8 +143,8 @@ public class MoneyDataController {
 
     @GetMapping("/getMoneyData")
     public ResponseEntity<MoneyDataResponse> getMoney(String userNum, Integer year, Integer month) {
-        List<MoneyInfo> getMoneyInfoList = moneyDataService.getByYearMonth(userNum, year, month);
-        List<MoneyResponse> moneyAllList = new ArrayList<>();
+        var getMoneyInfoList = moneyDataService.getByYearMonth(userNum, year, month);
+        var moneyAllList = new ArrayList<MoneyResponse>();
         for (MoneyInfo info : getMoneyInfoList) {
             MoneyResponse moneyResponse = new MoneyResponse();
             moneyResponse.setMoneyId(info.getMoneyId());
@@ -163,7 +163,7 @@ public class MoneyDataController {
 
     @GetMapping("/getTotalExpense")
     public Integer getTotalExpenses(String userNum, Integer year, Integer month) {
-        List<MoneyInfo> getTotalExpense = moneyDataService.getByYearMonth(userNum, year, month);
+        var getTotalExpense = moneyDataService.getByYearMonth(userNum, year, month);
         Integer totalExpense = 0;
         for (MoneyInfo info : getTotalExpense) {
             totalExpense += info.getAmount();
@@ -175,7 +175,7 @@ public class MoneyDataController {
 
     @GetMapping("/getTotalIncome")
     public Integer getTotalIncome(String userNum, Integer year, Integer month) {
-        List<IncomeInfo> getTotalIncome = moneyDataService.getIncomeInfo(userNum, year, month);
+        var getTotalIncome = moneyDataService.getIncomeInfo(userNum, year, month);
         Integer totalIncome = 0;
         for (IncomeInfo info : getTotalIncome) {
             totalIncome += info.getIncome();
@@ -187,8 +187,8 @@ public class MoneyDataController {
 
     @GetMapping("/getIncomeData")
     public ResponseEntity<MoneyDataResponse> getIncomeInfo(String userNum, Integer year, Integer month) {
-        List<IncomeInfo> getIncomeData = moneyDataService.getIncomeInfo(userNum, year, month);
-        List<IncomeResponse> incomeAllList = new ArrayList<>();
+        var getIncomeData = moneyDataService.getIncomeInfo(userNum, year, month);
+        var incomeAllList = new ArrayList<IncomeResponse>();
         for (IncomeInfo info : getIncomeData) {
 
             IncomeResponse incomeResponse = new IncomeResponse();
